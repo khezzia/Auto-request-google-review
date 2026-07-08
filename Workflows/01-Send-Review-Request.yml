@@ -1,0 +1,698 @@
+{
+    "name": "Medspa A - 01 - Send Review Request",
+    "flow": [
+        {
+            "id": 5,
+            "module": "airtable:ActionSearchRecords",
+            "version": 3,
+            "parameters": {
+                "__IMTCONN__": 9801450
+            },
+            "mapper": {
+                "base": "appkYnYaiHImMH30o",
+                "useColumnId": false,
+                "table": "tbldEOnsUKVVDT4Qg",
+                "formula": "AND({Status} = 'Completed', NOT({Review Requested}))",
+                "maxRecords": "10"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 49,
+                    "y": -1,
+                    "name": "Get Completed Appointments (Unsent)"
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "label": "Avensa  (User ID: usrZLzhPaggHeXujU)",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "airtable3"
+                            }
+                        }
+                    },
+                    "expect": {
+                        "base": {
+                            "mode": "chose",
+                            "label": "Avensa CRM"
+                        },
+                        "useColumnId": {
+                            "mode": "chose"
+                        },
+                        "table": {
+                            "mode": "chose",
+                            "label": "Client Review Requests"
+                        },
+                        "sort": {
+                            "mode": "chose"
+                        },
+                        "view": {
+                            "mode": "chose"
+                        },
+                        "fields": {
+                            "mode": "chose"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:airtable3,airtable2",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "base",
+                        "type": "select",
+                        "label": "Base",
+                        "required": true
+                    },
+                    {
+                        "name": "useColumnId",
+                        "type": "boolean",
+                        "label": "Use Column ID",
+                        "required": true
+                    },
+                    {
+                        "name": "table",
+                        "type": "select",
+                        "label": "Table",
+                        "required": true
+                    },
+                    {
+                        "name": "formula",
+                        "type": "text",
+                        "label": "Formula"
+                    },
+                    {
+                        "name": "maxRecords",
+                        "type": "integer",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "sort",
+                        "type": "array",
+                        "label": "Sort",
+                        "spec": [
+                            {
+                                "name": "field",
+                                "type": "select",
+                                "label": "Field",
+                                "options": [],
+                                "dynamic": true
+                            },
+                            {
+                                "name": "direction",
+                                "type": "select",
+                                "label": "Direction",
+                                "options": [
+                                    {
+                                        "label": "Descending",
+                                        "value": "desc"
+                                    },
+                                    {
+                                        "label": "Ascending",
+                                        "value": "asc"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "view",
+                        "type": "select",
+                        "label": "View"
+                    },
+                    {
+                        "name": "fields",
+                        "type": "select",
+                        "label": "Output Fields",
+                        "multiple": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "label": "Total number of bundles",
+                        "type": "uinteger"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "label": "Bundle order position",
+                        "type": "uinteger"
+                    },
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "createdTime",
+                        "type": "date",
+                        "label": "Created Time"
+                    },
+                    {
+                        "name": "First Name",
+                        "label": "First Name",
+                        "type": "text"
+                    },
+                    {
+                        "name": "Last Name",
+                        "label": "Last Name",
+                        "type": "text"
+                    },
+                    {
+                        "name": "Phone",
+                        "label": "Phone",
+                        "type": "text"
+                    },
+                    {
+                        "name": "Email",
+                        "label": "Email",
+                        "type": "text"
+                    },
+                    {
+                        "name": "Appointment Date",
+                        "label": "Appointment Date",
+                        "type": "date",
+                        "time": false
+                    },
+                    {
+                        "name": "Status",
+                        "label": "Status",
+                        "type": "text"
+                    },
+                    {
+                        "name": "Review Sent",
+                        "label": "Review Sent",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "Review Sent At",
+                        "label": "Review Sent At",
+                        "type": "date",
+                        "time": true
+                    },
+                    {
+                        "name": "Rating",
+                        "label": "Rating",
+                        "type": "number"
+                    },
+                    {
+                        "name": "Comment",
+                        "label": "Comment",
+                        "type": "text",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Rating Submitted At",
+                        "label": "Rating Submitted At",
+                        "type": "date",
+                        "time": true
+                    },
+                    {
+                        "name": "Review Requested",
+                        "label": "Review Requested",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "Google Review Link Sent At",
+                        "label": "Google Review Link Sent At",
+                        "type": "date",
+                        "time": true
+                    },
+                    {
+                        "name": "Service Provided",
+                        "label": "Service Provided",
+                        "type": "text"
+                    },
+                    {
+                        "name": "Internal Notes",
+                        "label": "Internal Notes",
+                        "type": "text",
+                        "multiline": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "module": "twilio:SendSMS",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 9801697
+            },
+            "mapper": {
+                "fromType": "phone",
+                "to": "{{5.Phone}}",
+                "messageBody": "body",
+                "from": "+19452850746",
+                "body": "Hi {{5.`First Name`}}! Thanks for visiting Avensa Health. Rate us: https://tally.so/r/rjWJXR?record_id={{5.id}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 365,
+                    "y": -2,
+                    "name": "Send Rating Request SMS"
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "label": "My Twilio connection",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "twilio"
+                            }
+                        }
+                    },
+                    "expect": {
+                        "fromType": {
+                            "mode": "chose",
+                            "label": "phone number"
+                        },
+                        "messageBody": {
+                            "mode": "chose",
+                            "label": "Create a Body"
+                        },
+                        "mediaUrl": {
+                            "mode": "chose"
+                        },
+                        "smartEncoded": {
+                            "mode": "chose"
+                        },
+                        "applicationSid": {
+                            "mode": "chose"
+                        },
+                        "provideFeedback": {
+                            "mode": "chose"
+                        },
+                        "from": {
+                            "mode": "chose",
+                            "label": "(945) 285-0746"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:twilio",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "fromType",
+                        "type": "select",
+                        "label": "Send a message from",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "phone",
+                                "service",
+                                "channel"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "to",
+                        "type": "text",
+                        "label": "To",
+                        "required": true
+                    },
+                    {
+                        "name": "messageBody",
+                        "type": "select",
+                        "label": "Message Body",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "body",
+                                "template"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "mediaUrl",
+                        "type": "array",
+                        "label": "Media URL",
+                        "spec": {
+                            "type": "url",
+                            "name": "value"
+                        }
+                    },
+                    {
+                        "name": "smartEncoded",
+                        "type": "boolean",
+                        "label": "Smart encoded"
+                    },
+                    {
+                        "name": "validityPeriod",
+                        "type": "uinteger",
+                        "label": "Validity period"
+                    },
+                    {
+                        "name": "statusCallback",
+                        "type": "url",
+                        "label": "Status callback"
+                    },
+                    {
+                        "name": "applicationSid",
+                        "type": "select",
+                        "label": "Application"
+                    },
+                    {
+                        "name": "maxPrice",
+                        "type": "number",
+                        "label": "Max price"
+                    },
+                    {
+                        "name": "provideFeedback",
+                        "type": "boolean",
+                        "label": "Provide feedback"
+                    },
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "Phone number",
+                        "required": true
+                    },
+                    {
+                        "name": "body",
+                        "type": "text",
+                        "label": "Body",
+                        "validate": {
+                            "max": 1600
+                        },
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 13,
+            "module": "airtable:ActionUpdateRecords",
+            "version": 3,
+            "parameters": {
+                "__IMTCONN__": 9801450
+            },
+            "mapper": {
+                "id": "{{5.id}}",
+                "base": "appkYnYaiHImMH30o",
+                "table": "tbldEOnsUKVVDT4Qg",
+                "record": {
+                    "fldkJNxYpWLKzIcia": true
+                },
+                "typecast": false,
+                "useColumnId": false
+            },
+            "metadata": {
+                "designer": {
+                    "x": 665,
+                    "y": -2,
+                    "name": "Mark Review Request as Sent"
+                },
+                "restore": {
+                    "expect": {
+                        "base": {
+                            "label": "Avensa CRM"
+                        },
+                        "table": {
+                            "label": "Client Review Requests"
+                        },
+                        "record": {
+                            "nested": {
+                                "fld1RpMl4ACHDJ1iM": {
+                                    "mode": "edit"
+                                },
+                                "fldkJNxYpWLKzIcia": {
+                                    "mode": "chose"
+                                },
+                                "fldo8xjzuEuYatfK4": {
+                                    "mode": "chose"
+                                }
+                            }
+                        },
+                        "typecast": {
+                            "mode": "chose"
+                        },
+                        "useColumnId": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "airtable3"
+                            },
+                            "label": "Avensa  (User ID: usrZLzhPaggHeXujU)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:airtable3,airtable2",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "base",
+                        "type": "select",
+                        "label": "Base",
+                        "required": true
+                    },
+                    {
+                        "name": "typecast",
+                        "type": "boolean",
+                        "label": "Smart links",
+                        "required": true
+                    },
+                    {
+                        "name": "useColumnId",
+                        "type": "boolean",
+                        "label": "Use Column ID",
+                        "required": true
+                    },
+                    {
+                        "name": "table",
+                        "type": "select",
+                        "label": "Table",
+                        "required": true
+                    },
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "Record ID",
+                        "required": true
+                    },
+                    {
+                        "name": "record",
+                        "spec": [
+                            {
+                                "name": "fldNpWyDti19NyO0V",
+                                "type": "text",
+                                "label": "First Name"
+                            },
+                            {
+                                "name": "fldpbQ8gwqqcruOsN",
+                                "type": "text",
+                                "label": "Last Name"
+                            },
+                            {
+                                "name": "fldaHXAOv4Imt224v",
+                                "type": "text",
+                                "label": "Phone"
+                            },
+                            {
+                                "name": "fldRk5aY4Hrj5QTyA",
+                                "type": "text",
+                                "label": "Email"
+                            },
+                            {
+                                "name": "fldoxs8ZDuhmgvSQq",
+                                "time": false,
+                                "type": "date",
+                                "label": "Appointment Date"
+                            },
+                            {
+                                "mode": "edit",
+                                "name": "fld1RpMl4ACHDJ1iM",
+                                "type": "select",
+                                "label": "Status"
+                            },
+                            {
+                                "name": "fldo8xjzuEuYatfK4",
+                                "type": "boolean",
+                                "label": "Review Sent"
+                            },
+                            {
+                                "name": "fld6yPWBsJ0pXT1UO",
+                                "time": true,
+                                "type": "date",
+                                "label": "Review Sent At"
+                            },
+                            {
+                                "name": "fldZiWqtdV3ezSd8p",
+                                "type": "number",
+                                "label": "Rating"
+                            },
+                            {
+                                "name": "fld4bnBJCyXIJk7JR",
+                                "type": "text",
+                                "label": "Comment"
+                            },
+                            {
+                                "name": "fldrBREF0N4yhu1TX",
+                                "time": true,
+                                "type": "date",
+                                "label": "Rating Submitted At"
+                            },
+                            {
+                                "name": "fldkJNxYpWLKzIcia",
+                                "type": "boolean",
+                                "label": "Review Requested"
+                            },
+                            {
+                                "name": "fldyyLgaBsNewWqSq",
+                                "time": true,
+                                "type": "date",
+                                "label": "Google Review Link Sent At"
+                            },
+                            {
+                                "name": "fldZw8V5e7YCAxLhN",
+                                "type": "text",
+                                "label": "Service Provided"
+                            },
+                            {
+                                "name": "fldMdgFQHynfcPjTa",
+                                "type": "text",
+                                "label": "Internal Notes"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Record"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "ID"
+                    },
+                    {
+                        "name": "createdTime",
+                        "type": "date",
+                        "label": "Created Time"
+                    },
+                    {
+                        "name": "First Name",
+                        "type": "text",
+                        "label": "First Name"
+                    },
+                    {
+                        "name": "Last Name",
+                        "type": "text",
+                        "label": "Last Name"
+                    },
+                    {
+                        "name": "Phone",
+                        "type": "text",
+                        "label": "Phone"
+                    },
+                    {
+                        "name": "Email",
+                        "type": "text",
+                        "label": "Email"
+                    },
+                    {
+                        "name": "Appointment Date",
+                        "time": false,
+                        "type": "date",
+                        "label": "Appointment Date"
+                    },
+                    {
+                        "name": "Status",
+                        "type": "text",
+                        "label": "Status"
+                    },
+                    {
+                        "name": "Review Sent",
+                        "type": "boolean",
+                        "label": "Review Sent"
+                    },
+                    {
+                        "name": "Review Sent At",
+                        "time": true,
+                        "type": "date",
+                        "label": "Review Sent At"
+                    },
+                    {
+                        "name": "Rating",
+                        "type": "number",
+                        "label": "Rating"
+                    },
+                    {
+                        "name": "Comment",
+                        "type": "text",
+                        "label": "Comment",
+                        "multiline": true
+                    },
+                    {
+                        "name": "Rating Submitted At",
+                        "time": true,
+                        "type": "date",
+                        "label": "Rating Submitted At"
+                    },
+                    {
+                        "name": "Review Requested",
+                        "type": "boolean",
+                        "label": "Review Requested"
+                    },
+                    {
+                        "name": "Google Review Link Sent At",
+                        "time": true,
+                        "type": "date",
+                        "label": "Google Review Link Sent At"
+                    },
+                    {
+                        "name": "Service Provided",
+                        "type": "text",
+                        "label": "Service Provided"
+                    },
+                    {
+                        "name": "Internal Notes",
+                        "type": "text",
+                        "label": "Internal Notes",
+                        "multiline": true
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "sequential": true,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us2.make.com",
+        "notes": []
+    }
+}
